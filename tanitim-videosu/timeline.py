@@ -54,7 +54,7 @@ SCENES_169 = [
                 dict(at=0.0, shot=1, kind="info", title="DAL 2", sub="[BOŞLUK]"),
                 dict(at=0.0, shot=2, kind="info", title="DAL 3", sub="[BOŞLUK]")]),
     dict(name="atolye", lines=[7, 19, 8, 9], pad=2.0, sizzle=True,
-         shots=[("FOTO-6", "zoom_in"), ("FOTO-7", "pan_l"), ("FOTO-8", "zoom_out")],
+         shots=[("FOTO-6", "parallax"), ("FOTO-7", "pan_l"), ("FOTO-8", "zoom_out")],
          cards=[dict(at=0.6, kind="label", title="Atölye ve Uygulama")]),
     dict(name="kariyer", lines=[10, 11, 20, 12], pad=2.0, lift=True,
          shots=[("FOTO-9", "parallax"), ("FOTO-10", "pan_r")],

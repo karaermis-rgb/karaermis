@@ -141,6 +141,7 @@ class Shot:
         self.idx = idx
         src, real = load_slot(slot, photos, (W, H))
         self.cy_bias = 0.3 if (photos.get(slot) or {}).get("kirp") else 0.0
+        self.temsili = bool((photos.get(slot) or {}).get("temsili"))
         ow, oh = int(W * self.OVERS), int(H * self.OVERS)
         self.big = cover(src, ow, oh)
         if move == "parallax":
@@ -418,6 +419,8 @@ class Film:
         self.cards, self.dings = build_cards(self.tl, self.W, self.H)
         self.subs = build_subs(self.tl, self.W, self.H)
         self.end_bg, self.end_items = build_endcard(self.W, self.H)
+        self.temsili_lbl = pill("Temsilî görsel", font(F_SEMI, int(30 * self.W / (1920 if self.W > self.H else 1080))),
+                                (25, 14, 8, 170), (255, 235, 210), padx=20, pady=10)
         self._fx()
 
     def _fx(self):
@@ -483,6 +486,13 @@ class Film:
         if t < 0.25:  # siyahtan açılış
             base = base * (t / 0.25)
         img = Image.fromarray((np.clip(base, 0, 1) * 255).astype(np.uint8)).convert("RGBA")
+        # --- "Temsilî görsel" etiketi
+        for s in self.shots:
+            if s.temsili and s.start - TR / 2 <= t < s.end + TR / 2:
+                a = min(ease_io((t - s.start + TR / 2) / TR), ease_io((s.end + TR / 2 - t) / TR))
+                m = self.temsili_lbl.copy()
+                m.putalpha(m.split()[3].point(lambda v: int(v * a)))
+                _paste(img, m, W - m.width - int(W * 0.03), int(H * 0.03))
         # --- kartlar ve altyazı
         for c in self.cards:
             c.draw(img, t, W, H)

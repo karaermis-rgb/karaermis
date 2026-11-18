@@ -33,8 +33,9 @@
     "tarif": "3. dal uygulaması"
   },
   "FOTO-6": {
-    "dosya": null,
-    "tarif": "Atölyede uygulama 1"
+    "dosya": "temsili_tava.jpg",
+    "tarif": "Kızgın yağda cızırdayan tava (okulda çekilmedi)",
+    "temsili": true
   },
   "FOTO-7": {
     "dosya": null,
