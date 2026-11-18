@@ -1,5 +1,5 @@
 {
-  "_aciklama": "Her yuvaya fotograflar/ klasöründeki dosya adını yazın (null = yer tutucu). 'kirp' = [x0,y0,x1,y1] piksel; araçlar kadraj dışında kalsın diye. Plakalar ayrıca dosyalarda bulanıklaştırıldı.",
+  "_aciklama": "Her yuvaya fotograflar/ klasöründeki dosya adını yazın (null = yer tutucu). 'kirp' = [x0,y0,x1,y1] piksel; araçlar kadraj dışında kalsın diye. Plakalar ayrıca dosyalarda bulanıklaştırıldı. 'grafik': true = fotoğraf yerine yazısız sıcak renkli zemin (demo).",
   "FOTO-1": {
     "dosya": "okul_bahce_genis.jpg",
     "tarif": "Okul binası, bahçeden geniş görünüm",
@@ -22,15 +22,18 @@
   },
   "FOTO-3": {
     "dosya": null,
-    "tarif": "1. dal uygulaması"
+    "tarif": "1. dal uygulaması",
+    "grafik": true
   },
   "FOTO-4": {
     "dosya": null,
-    "tarif": "2. dal uygulaması"
+    "tarif": "2. dal uygulaması",
+    "grafik": true
   },
   "FOTO-5": {
     "dosya": null,
-    "tarif": "3. dal uygulaması"
+    "tarif": "3. dal uygulaması",
+    "grafik": true
   },
   "FOTO-6": {
     "dosya": "temsili_tava.jpg",
@@ -39,19 +42,23 @@
   },
   "FOTO-7": {
     "dosya": null,
-    "tarif": "Atölyede uygulama 2"
+    "tarif": "Atölyede uygulama 2",
+    "grafik": true
   },
   "FOTO-8": {
     "dosya": null,
-    "tarif": "Atölyede uygulama 3 / hijyen"
+    "tarif": "Atölyede uygulama 3 / hijyen",
+    "grafik": true
   },
   "FOTO-9": {
     "dosya": null,
-    "tarif": "Servis / sunum karesi"
+    "tarif": "Servis / sunum karesi",
+    "grafik": true
   },
   "FOTO-10": {
     "dosya": null,
-    "tarif": "Hazırlanan tabak / ürün sunumu"
+    "tarif": "Hazırlanan tabak / ürün sunumu",
+    "grafik": true
   },
   "FOTO-11": {
     "dosya": "okul_giris_kapi.jpg",

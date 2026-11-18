@@ -109,8 +109,28 @@ def placeholder(slot, tarif, size):
     return im
 
 
+def graphic_bg(seed, size):
+    """Fotoğraf yerine: sıcak renkli, yazısız, yumuşak ışıklı zemin."""
+    W, H = size
+    rng = np.random.default_rng(seed)
+    yy, xx = np.mgrid[0:H:4, 0:W:4].astype(np.float32)
+    base = np.zeros(yy.shape + (3,), np.float32) + np.array(BROWN, np.float32) * 0.9
+    for _ in range(5):
+        cx, cy = rng.uniform(0, W), rng.uniform(0, H)
+        rad = rng.uniform(0.25, 0.55) * max(W, H)
+        col = np.array(rng.choice([RED, ORANGE, (180, 90, 40), (230, 160, 80)]), np.float32)
+        g = np.exp(-(((xx - cx) ** 2 + (yy - cy) ** 2) / (2 * rad ** 2)))[..., None]
+        base = base * (1 - 0.55 * g) + col * 0.55 * g
+    dots = ((np.add.outer(np.arange(yy.shape[0]), np.arange(yy.shape[1])) % 18) == 0) * 10.0
+    base += dots[..., None]
+    im = Image.fromarray(np.clip(base, 0, 255).astype(np.uint8)).resize((W, H), Image.BICUBIC)
+    return im.filter(ImageFilter.GaussianBlur(2))
+
+
 def load_slot(slot, photos, size):
     info = photos.get(slot) or {}
+    if info.get("grafik") and not info.get("dosya"):
+        return graphic_bg(int(slot.split("-")[1]), size), False
     fn = info.get("dosya")
     if fn:
         p = os.path.join(FOTO_DIR, fn)
@@ -285,7 +305,7 @@ def build_cards(tl, W, H):
             elif k == "info":
                 tag = pill(c["title"], f_tag, ORANGE + (255,), (255, 255, 255))
                 tg, tp = shadowed(tag, 14, (0, 8), 120)
-                im, pad = panel([c["sub"]], [f_l], [BROWN], W * (0.30 if wide else 0.78))
+                im, pad = panel([c["sub"]], [f_t], [RED], W * (0.60 if wide else 0.80), pad=50)
                 if wide:
                     x, y = W * 0.05, H * 0.36
                 else:
@@ -574,9 +594,9 @@ def main():
     vos = vo_list(film.tl)
     ses.build_mix(film.tl, film.transitions, film.dings, wav, vos)
     photos = T.load_photos()
-    draft = (any(isinstance(v, dict) and not v.get("dosya") for v in photos.values())
+    draft = (any(isinstance(v, dict) and not v.get("dosya") and not v.get("grafik") for v in photos.values())
              or any("[BOŞLUK" in x for x in list(T.LINES.values()) + T.ENDCARD["rows"]))
-    suffix = ("_TASLAK" if draft else "") + ("" if vos else "_seslendirmesiz")
+    suffix = ("_TASLAK" if draft else "_DEMO") + ("" if vos else "_seslendirmesiz")
     name = {"169": "tanitim_16x9", "916": "reels_9x16"}[a.fmt] + suffix + ".mp4"
     out = os.path.join(OUT_DIR, name)
     subprocess.check_call(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", lst,

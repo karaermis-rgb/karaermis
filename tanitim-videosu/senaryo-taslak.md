@@ -102,3 +102,13 @@ Süreyi 2–3 dk'ya çıkarmak için, okula özgü iddia içermeyen genel cümle
 3. `python3 tts.py` → Google TTS seslendirmesi (`ses/vo/`).
 4. `python3 render.py 169` ve `python3 render.py 916` → `cikti/` (MP4 + SRT altyazı).
 Seslendirme gelince sahne süreleri gerçek ses süresine göre kendiliğinden ayarlanır, müzik konuşma altında kısılır.
+
+---
+
+## F) DEMO sürümü (onaylı: "Demo bu sen devam et")
+- `[BOŞLUK]` içeren cümleler (dallar, atölye adı, staj, somut kariyer bilgisi) ve künyedeki adres/telefon çıkarıldı.
+- Dallar sahnesi → "Ne öğreniyorsun?" (Mutfak Teknikleri / Hijyen ve Güvenlik / Sunum ve Servis – alanın genel konuları, okula özgü iddia değil).
+- Fotoğrafı olmayan yuvalar yazısız sıcak renkli grafik zeminle dolduruldu.
+- Eklenen genel cümleler: 5 (yeni metin), 23, 24, 25 – bkz. timeline.py.
+- Tava görseli okulda çekilmedi; ekranda "Temsilî görsel" etiketiyle gösteriliyor.
+- Gerçek sürüm için: dallar, atölye/staj, iletişim bilgileri ve mutfak içi okul fotoğrafları gerekli.
