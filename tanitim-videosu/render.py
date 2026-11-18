@@ -115,6 +115,8 @@ def load_slot(slot, photos, size):
     if fn:
         p = os.path.join(FOTO_DIR, fn)
         im = ImageOps.exif_transpose(Image.open(p)).convert("RGB")
+        if info.get("kirp"):
+            im = im.crop(tuple(info["kirp"]))
         return warm_grade(im), True
     return placeholder(slot, info.get("tarif", ""), size), False
 
@@ -138,6 +140,7 @@ class Shot:
         self.slot, self.move, self.start, self.end, self.W, self.H = slot, move, start, end, W, H
         self.idx = idx
         src, real = load_slot(slot, photos, (W, H))
+        self.cy_bias = 0.3 if (photos.get(slot) or {}).get("kirp") else 0.0
         ow, oh = int(W * self.OVERS), int(H * self.OVERS)
         self.big = cover(src, ow, oh)
         if move == "parallax":
@@ -161,7 +164,7 @@ class Shot:
         bw, bh = W * self.OVERS / z, H * self.OVERS / z
         bw, bh = min(bw, img.width), min(bh, img.height)
         x0 = (img.width - bw) * cx
-        y0 = (img.height - bh) * cy
+        y0 = (img.height - bh) * min(1.0, cy + self.cy_bias)
         return img.resize((W, H), Image.BILINEAR, box=(x0, y0, x0 + bw, y0 + bh))
 
     def frame(self, t):

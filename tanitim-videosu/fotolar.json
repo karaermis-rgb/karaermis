@@ -1,15 +1,75 @@
 {
-  "_aciklama": "Her yuvaya fotograflar/ klasöründeki gerçek dosya adını yazın. null = yer tutucu (taslak).",
-  "FOTO-1":  {"dosya": null, "tarif": "Mutfakta tezgâh başında öğrenci, yakın plan"},
-  "FOTO-2":  {"dosya": null, "tarif": "Atölye genel görünüm"},
-  "FOTO-3":  {"dosya": null, "tarif": "1. dal uygulaması"},
-  "FOTO-4":  {"dosya": null, "tarif": "2. dal uygulaması"},
-  "FOTO-5":  {"dosya": null, "tarif": "3. dal uygulaması"},
-  "FOTO-6":  {"dosya": null, "tarif": "Atölyede uygulama 1"},
-  "FOTO-7":  {"dosya": null, "tarif": "Atölyede uygulama 2"},
-  "FOTO-8":  {"dosya": null, "tarif": "Atölyede uygulama 3 / hijyen"},
-  "FOTO-9":  {"dosya": null, "tarif": "Servis / sunum karesi"},
-  "FOTO-10": {"dosya": null, "tarif": "Hazırlanan tabak / ürün sunumu"},
-  "FOTO-11": {"dosya": null, "tarif": "Öğretmenler (varsa)"},
-  "FOTO-12": {"dosya": null, "tarif": "Grup / kapanış karesi"}
+  "_aciklama": "Her yuvaya fotograflar/ klasöründeki dosya adını yazın (null = yer tutucu). 'kirp' = [x0,y0,x1,y1] piksel; araçlar kadraj dışında kalsın diye. Plakalar ayrıca dosyalarda bulanıklaştırıldı.",
+  "FOTO-1": {
+    "dosya": "okul_bahce_genis.jpg",
+    "tarif": "Okul binası, bahçeden geniş görünüm",
+    "kirp": [
+      0,
+      0,
+      3200,
+      850
+    ]
+  },
+  "FOTO-2": {
+    "dosya": "okul_cephe_gunesli.jpg",
+    "tarif": "Okul cephesi, güneşli",
+    "kirp": [
+      0,
+      0,
+      3200,
+      955
+    ]
+  },
+  "FOTO-3": {
+    "dosya": null,
+    "tarif": "1. dal uygulaması"
+  },
+  "FOTO-4": {
+    "dosya": null,
+    "tarif": "2. dal uygulaması"
+  },
+  "FOTO-5": {
+    "dosya": null,
+    "tarif": "3. dal uygulaması"
+  },
+  "FOTO-6": {
+    "dosya": null,
+    "tarif": "Atölyede uygulama 1"
+  },
+  "FOTO-7": {
+    "dosya": null,
+    "tarif": "Atölyede uygulama 2"
+  },
+  "FOTO-8": {
+    "dosya": null,
+    "tarif": "Atölyede uygulama 3 / hijyen"
+  },
+  "FOTO-9": {
+    "dosya": null,
+    "tarif": "Servis / sunum karesi"
+  },
+  "FOTO-10": {
+    "dosya": null,
+    "tarif": "Hazırlanan tabak / ürün sunumu"
+  },
+  "FOTO-11": {
+    "dosya": "okul_giris_kapi.jpg",
+    "tarif": "Okul giriş kapısı",
+    "kirp": [
+      0,
+      0,
+      4000,
+      1160
+    ]
+  },
+  "FOTO-12": {
+    "dosya": "okul_cephe_alt_aci.jpg",
+    "tarif": "Okul cephesi, alt açı",
+    "kirp": [
+      0,
+      0,
+      3200,
+      1175
+    ]
+  }
 }
