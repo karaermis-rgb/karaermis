@@ -564,7 +564,8 @@ def main():
     name = {"169": "tanitim_16x9", "916": "reels_9x16"}[a.fmt] + suffix + ".mp4"
     out = os.path.join(OUT_DIR, name)
     subprocess.check_call(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", lst,
-                           "-i", wav, "-c:v", "copy", "-c:a", "aac", "-b:a", "192k",
+                           "-i", wav, "-c:v", "copy", "-af", "loudnorm=I=-14:TP=-1.5:LRA=11",
+                           "-ar", "48000", "-c:a", "aac", "-b:a", "192k",
                            "-shortest", "-movflags", "+faststart", out])
     # altyazı dosyası (SRT) da üret
     srt = out.replace(".mp4", ".srt")
