@@ -79,3 +79,26 @@ Ana video: 16:9, 1920×1080, hedef ~2 dk 30 sn | Kısa kesit: 9:16, 1080×1920, 
 - Altyazı: alt bölümde, kalın sans-serif, 16:9'da ~64 px, 9:16'da ~78 px, koyu yarı saydam şerit üzerinde, cümle cümle
 - Bilgi kartları: yuvarlatılmış köşe, hafif gölge, sağdan/soldan kayarak giriş
 - Sesler: tamamı Python ile sentezlenecek (müzik altlığı, ambiyans, tık, whoosh, ding); dış ses kütüphanesi yok
+
+---
+
+## D) v1 taslak render'da EKLENEN cümleler (onayınıza)
+Süreyi 2–3 dk'ya çıkarmak için, okula özgü iddia içermeyen genel cümleler eklendi:
+
+| No | Sahne | Cümle |
+|----|-------|-------|
+| 18 | Alan | Mutfakta her tabak; bilgi, emek ve yaratıcılığın buluştuğu küçük bir eserdir. |
+| 19 | Atölye | Malzemeyi tanımayı, doğru pişirme tekniklerini ve tabağı özenle sunmayı adım adım öğreniyorsun. |
+| 20 | Kariyer | Disiplin, özen ve yaratıcılık; bu meslekte seni öne çıkaracak üç anahtar. |
+| 21 | Öğretmenler | Her uygulamada, her denemede yanında olacaklar. |
+| 22 | Kapanış | Geleceğini kendi ellerinle hazırla. |
+| 6/16/17 | Dallar | Her dal için ayrı tanım satırı: [BOŞLUK] |
+
+İstemediğinizi söyleyin, çıkarırım.
+
+## E) Son videoyu üretmek için
+1. Fotoğrafları `fotograflar/` klasörüne koyun, `fotolar.json`'da her yuvaya dosya adını yazın (ya da bana bırakın).
+2. `timeline.py` içindeki `[BOŞLUK]` satırlarını ve `ENDCARD` iletişim bilgilerini doldurun.
+3. `python3 tts.py` → Google TTS seslendirmesi (`ses/vo/`).
+4. `python3 render.py 169` ve `python3 render.py 916` → `cikti/` (MP4 + SRT altyazı).
+Seslendirme gelince sahne süreleri gerçek ses süresine göre kendiliğinden ayarlanır, müzik konuşma altında kısılır.

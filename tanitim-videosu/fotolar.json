@@ -1,0 +1,15 @@
+{
+  "_aciklama": "Her yuvaya fotograflar/ klasöründeki gerçek dosya adını yazın. null = yer tutucu (taslak).",
+  "FOTO-1":  {"dosya": null, "tarif": "Mutfakta tezgâh başında öğrenci, yakın plan"},
+  "FOTO-2":  {"dosya": null, "tarif": "Atölye genel görünüm"},
+  "FOTO-3":  {"dosya": null, "tarif": "1. dal uygulaması"},
+  "FOTO-4":  {"dosya": null, "tarif": "2. dal uygulaması"},
+  "FOTO-5":  {"dosya": null, "tarif": "3. dal uygulaması"},
+  "FOTO-6":  {"dosya": null, "tarif": "Atölyede uygulama 1"},
+  "FOTO-7":  {"dosya": null, "tarif": "Atölyede uygulama 2"},
+  "FOTO-8":  {"dosya": null, "tarif": "Atölyede uygulama 3 / hijyen"},
+  "FOTO-9":  {"dosya": null, "tarif": "Servis / sunum karesi"},
+  "FOTO-10": {"dosya": null, "tarif": "Hazırlanan tabak / ürün sunumu"},
+  "FOTO-11": {"dosya": null, "tarif": "Öğretmenler (varsa)"},
+  "FOTO-12": {"dosya": null, "tarif": "Grup / kapanış karesi"}
+}
