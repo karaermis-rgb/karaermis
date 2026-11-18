@@ -595,7 +595,8 @@ def main():
     ses.build_mix(film.tl, film.transitions, film.dings, wav, vos)
     photos = T.load_photos()
     draft = (any(isinstance(v, dict) and not v.get("dosya") and not v.get("grafik") for v in photos.values())
-             or any("[BOŞLUK" in x for x in list(T.LINES.values()) + T.ENDCARD["rows"]))
+             or any("[BOŞLUK" in s["text"] for s in film.tl["subs"])
+             or any("[BOŞLUK" in x for x in T.ENDCARD["rows"]))
     suffix = ("_TASLAK" if draft else "_DEMO") + ("" if vos else "_seslendirmesiz")
     name = {"169": "tanitim_16x9", "916": "reels_9x16"}[a.fmt] + suffix + ".mp4"
     out = os.path.join(OUT_DIR, name)
