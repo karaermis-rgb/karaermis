@@ -73,7 +73,7 @@ SCENES_169 = [
 
 # 60 sn dikey kesit: aynı cümlelerin alt kümesi
 SCENES_916 = [
-    dict(name="acilis", lines=[1, 2], pad=0.6, ticks=True,
+    dict(name="acilis", lines=[1, 2], pad=1.4, ticks=True,
          shots=[("FOTO-1", "zoom_in")],
          cards=[dict(at=0.2, kind="question", title="Bu usta sen olabilir misin?")]),
     dict(name="alan", lines=[4], pad=0.6,
@@ -87,7 +87,7 @@ SCENES_916 = [
     dict(name="atolye", lines=[8], pad=1.0, sizzle=True,
          shots=[("FOTO-6", "zoom_in"), ("FOTO-7", "pan_l")],
          cards=[dict(at=0.3, kind="label", title="Atölye ve Uygulama")]),
-    dict(name="kariyer", lines=[11], pad=1.0, lift=True,
+    dict(name="kariyer", lines=[11], pad=2.0, lift=True,
          shots=[("FOTO-9", "parallax")],
          cards=[dict(at=0.2, kind="list", title="Nerelerde çalışabilirsin?",
                      items=["Restoranlar", "Oteller", "Pastaneler",
@@ -95,7 +95,7 @@ SCENES_916 = [
     dict(name="kapanis", lines=[15], pad=0.6,
          shots=[("FOTO-12", "zoom_out")],
          cards=[dict(at=0.2, kind="cta", title="Seni de mutfağımıza bekliyoruz!")]),
-    dict(name="kunye", lines=[], pad=5.0, endcard=True, shots=[], cards=[]),
+    dict(name="kunye", lines=[], pad=7.0, endcard=True, shots=[], cards=[]),
 ]
 
 ENDCARD = dict(

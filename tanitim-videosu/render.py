@@ -560,7 +560,10 @@ def main():
     wav = os.path.join(tmp, f"{a.fmt}.wav")
     vos = vo_list(film.tl)
     ses.build_mix(film.tl, film.transitions, film.dings, wav, vos)
-    suffix = "" if vos else "_TASLAK_seslendirmesiz"
+    photos = T.load_photos()
+    draft = (any(isinstance(v, dict) and not v.get("dosya") for v in photos.values())
+             or any("[BOŞLUK" in x for x in list(T.LINES.values()) + T.ENDCARD["rows"]))
+    suffix = ("_TASLAK" if draft else "") + ("" if vos else "_seslendirmesiz")
     name = {"169": "tanitim_16x9", "916": "reels_9x16"}[a.fmt] + suffix + ".mp4"
     out = os.path.join(OUT_DIR, name)
     subprocess.check_call(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", lst,

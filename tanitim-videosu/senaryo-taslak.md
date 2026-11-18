@@ -3,7 +3,7 @@
 
 Okul: Şehit Yavuz Sonat Güzel Mesleki ve Teknik Anadolu Lisesi (Kandıra)
 Hedef kitle: 8. sınıf öğrencileri ve velileri (LGS sonrası tercih dönemi)
-Seslendirme: Google TTS (tr-TR) – API anahtarı bekleniyor
+Seslendirme: ElevenLabs, ses "Meftun" (eleven_v4) – dosyalar ses/vo/ (Google TTS betiği tts.py yedek olarak duruyor)
 Ana video: 16:9, 1920×1080, hedef ~2 dk 30 sn | Kısa kesit: 9:16, 1080×1920, 60 sn
 
 > `[BOŞLUK]` = sizden bilgi bekleyen yer. Bu yerler doldurulmadan video üretilmeyecek.
