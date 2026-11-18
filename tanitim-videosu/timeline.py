@@ -107,6 +107,48 @@ ENDCARD = dict(
     rows=["Kandıra · Kocaeli"],
 )
 
+# ---------------------------------------------------------------- ÖRNEK sürüm
+# ORNEK=1 ile çalıştırılırsa eksik bilgiler açıkça ÖRNEK etiketli uydurma
+# değerlerle doldurulur. Yayına uygun DEĞİLDİR; yalnızca tam hâlin görünümü için.
+ORNEK = os.environ.get("ORNEK") == "1"
+if ORNEK:
+    LINES.update({
+        105: "Okulumuzda Aşçılık, Pastacılık ve Servis dallarında uzmanlaşabilirsin.",
+        106: "Aşçılıkta sıcak ve soğuk mutfağın tüm inceliklerini öğrenirsin.",
+        116: "Pastacılıkta hamurdan süslemeye, tatlıların dünyasını keşfedersin.",
+        117: "Serviste ise misafiri ağırlamanın ve sunumun ustası olursun.",
+        107: "Uygulamalarımızı tam donanımlı uygulama mutfağımızda yapıyoruz.",
+        109: "Son sınıfta işletmelerde beceri eğitimi alarak meslek hayatına erkenden adım atıyorsun.",
+        112: "Mezun olduğunda kendi mutfağını kuracak bilgi ve beceriyle donanmış olursun.",
+    })
+    _dal = [("Aşçılık", "FOTO-3"), ("Pastacılık", "FOTO-4"), ("Servis", "FOTO-5")]
+    _dallar = lambda lines, pad: dict(
+        name="dallar", lines=lines, pad=pad, cuts=[116, 117] if 116 in lines else [],
+        shots=[(f, "zoom_in" if i % 2 == 0 else "zoom_out") for i, (_, f) in enumerate(_dal)],
+        cards=[dict(at=0.0, shot=i, kind="info", title="DAL · ÖRNEK", sub=n, **({"line": l} if l in lines else {}))
+               for i, ((n, _), l) in enumerate(zip(_dal, (106, 116, 117)))])
+    SCENES_169 = [
+        SCENES_169[0], SCENES_169[1],
+        _dallar([105, 106, 116, 117], 2.0),
+        dict(SCENES_169[2], lines=[5, 19, 23], pad=2.0),
+        dict(SCENES_169[3], lines=[107, 24, 8, 109], pad=2.5),
+        dict(SCENES_169[4], lines=[10, 11, 112, 20], pad=2.5),
+        SCENES_169[5], SCENES_169[6], SCENES_169[7],
+    ]
+    SCENES_916 = [
+        SCENES_916[0], SCENES_916[1],
+        _dallar([105, 106, 116, 117], 0.8),
+        dict(SCENES_916[3], lines=[107], pad=1.5),
+        dict(SCENES_916[4], lines=[11], pad=2.0),
+        SCENES_916[5],
+        dict(SCENES_916[6], pad=5.4),
+    ]
+    ENDCARD = dict(ENDCARD, rows=[
+        "Adres: Örnek Mah. Okul Cad. No:1 Kandıra / Kocaeli (ÖRNEK)",
+        "Telefon: 0 (262) 000 00 00 (ÖRNEK)",
+        "Web: ornek-okul.meb.k12.tr (ÖRNEK)",
+    ])
+
 GAP = 0.35  # cümleler arası sessizlik
 
 

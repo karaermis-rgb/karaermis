@@ -290,6 +290,8 @@ def build_cards(tl, W, H):
             if "shot" in c:
                 sh = shots[c["shot"]]
                 t0, t1 = sh.start + 0.35, sh.end - 0.2
+                if "line" in c:
+                    t0 = max(t0, next(s["start"] for s in tl["subs"] if s["id"] == c["line"]))
             else:
                 t0, t1 = sc["start"] + c["at"], sc["end"] - 0.25
             if k in ("question", "cta"):
@@ -427,8 +429,12 @@ class Film:
                 self.transitions.append(sc["start"])
                 continue
             d = (sc["end"] - sc["start"]) / n
+            bounds = [sc["start"] + k * d for k in range(n)] + [sc["end"]]
+            if sc.get("cuts"):  # çekim geçişleri belirli cümlelerin başına hizalanır
+                st = {s["id"]: s["start"] for s in self.tl["subs"]}
+                bounds = [sc["start"]] + [st[i] - 0.15 for i in sc["cuts"]] + [sc["end"]]
             for k, (slot, mv) in enumerate(sc["shots"]):
-                sh = Shot(slot, mv, sc["start"] + k * d, sc["start"] + (k + 1) * d, photos,
+                sh = Shot(slot, mv, bounds[k], bounds[k + 1], photos,
                           self.W, self.H, idx)
                 idx += 1
                 self.shots.append(sh)
@@ -439,6 +445,9 @@ class Film:
         self.cards, self.dings = build_cards(self.tl, self.W, self.H)
         self.subs = build_subs(self.tl, self.W, self.H)
         self.end_bg, self.end_items = build_endcard(self.W, self.H)
+        self.ornek_lbl = pill("ÖRNEK – yayına uygun değil",
+                              font(F_BLACK, int(30 * self.W / (1920 if self.W > self.H else 1080))),
+                              (200, 30, 30, 215), (255, 255, 255), padx=20, pady=10)
         self.temsili_lbl = pill("Temsilî görsel", font(F_SEMI, int(30 * self.W / (1920 if self.W > self.H else 1080))),
                                 (25, 14, 8, 170), (255, 235, 210), padx=20, pady=10)
         self._fx()
@@ -513,6 +522,9 @@ class Film:
                 m = self.temsili_lbl.copy()
                 m.putalpha(m.split()[3].point(lambda v: int(v * a)))
                 _paste(img, m, W - m.width - int(W * 0.03), int(H * 0.03))
+        # --- ÖRNEK filigranı
+        if T.ORNEK:
+            _paste(img, self.ornek_lbl, (W - self.ornek_lbl.width) // 2, int(H * 0.025))
         # --- kartlar ve altyazı
         for c in self.cards:
             c.draw(img, t, W, H)
@@ -597,7 +609,7 @@ def main():
     draft = (any(isinstance(v, dict) and not v.get("dosya") and not v.get("grafik") for v in photos.values())
              or any("[BOŞLUK" in s["text"] for s in film.tl["subs"])
              or any("[BOŞLUK" in x for x in T.ENDCARD["rows"]))
-    suffix = ("_TASLAK" if draft else "_DEMO") + ("" if vos else "_seslendirmesiz")
+    suffix = ("_ORNEK" if T.ORNEK else "_TASLAK" if draft else "_DEMO") + ("" if vos else "_seslendirmesiz")
     name = {"169": "tanitim_16x9", "916": "reels_9x16"}[a.fmt] + suffix + ".mp4"
     out = os.path.join(OUT_DIR, name)
     subprocess.check_call(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", lst,
