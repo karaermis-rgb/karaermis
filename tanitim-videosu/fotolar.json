@@ -79,5 +79,23 @@
       3200,
       1175
     ]
+  },
+  "KLIP-1": {
+    "dosya": "../klipler/temsili_ogrenci_erkek.mp4",
+    "tarif": "Şef önlüklü erkek öğrenci portresi (yapay zekâ, Veo)",
+    "temsili": true,
+    "odak_x": 0.5
+  },
+  "KLIP-2": {
+    "dosya": "../klipler/temsili_alevli_tava.mp4",
+    "tarif": "Alevli tavayla çalışan genç (yapay zekâ, Veo)",
+    "temsili": true,
+    "odak_x": 0.62
+  },
+  "KLIP-3": {
+    "dosya": "../klipler/temsili_ogrenci_kiz.mp4",
+    "tarif": "Şef önlüklü gülümseyen kız öğrenci (yapay zekâ, Veo)",
+    "temsili": true,
+    "odak_x": 0.54
   }
 }

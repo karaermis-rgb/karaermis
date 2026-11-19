@@ -153,6 +153,54 @@ def contain(im, W, H):
     return im.resize((round(im.width * s), round(im.height * s)), Image.LANCZOS)
 
 
+class VideoShot:
+    """Video klip çekimi: kareler ffmpeg ile sırayla okunur (her işçi kendi okuyucusu)."""
+
+    def __init__(self, slot, start, end, photos, W, H, idx):
+        info = photos.get(slot) or {}
+        self.slot, self.start, self.end, self.W, self.H, self.idx = slot, start, end, W, H, idx
+        self.path = os.path.normpath(os.path.join(FOTO_DIR, info["dosya"]))
+        self.temsili = bool(info.get("temsili"))
+        self.cx = float(info.get("odak_x", 0.5))
+        dur = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration",
+                                             "-of", "csv=p=0", self.path]).decode())
+        self.t0 = start - TR / 2
+        L = (end - start) + TR
+        self.slow = max(1.0, L / dur)              # klip kısa kalırsa yavaşlat
+        self.ss = max(0.0, (dur - L) / 2) if self.slow == 1.0 else 0.0
+        self.proc, self.pos, self.last = None, -1, None
+
+    def _open(self, n0):
+        if self.proc:
+            self.proc.kill()
+        W, H = self.W, self.H
+        if W > H:
+            vf = f"scale={W}:{H}"
+        else:
+            vf = f"scale=-2:{H},crop={W}:{H}:(in_w-{W})*{self.cx}:0"
+        vf = f"setpts=PTS*{self.slow},fps={FPS}," + vf + ",eq=saturation=1.05"
+        start = self.ss + n0 / FPS / self.slow
+        self.proc = subprocess.Popen(["ffmpeg", "-v", "error", "-ss", f"{start:.3f}", "-i", self.path,
+                                      "-vf", vf, "-f", "rawvideo", "-pix_fmt", "rgb24", "-"],
+                                     stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+        self.pos = n0 - 1
+
+    def frame(self, t):
+        n = max(0, int(round((t - self.t0) * FPS)))
+        if self.proc is None or n <= self.pos - 1 or n > self.pos + 90:
+            self._open(n)
+        size = self.W * self.H * 3
+        while self.pos < n:
+            buf = self.proc.stdout.read(size)
+            if len(buf) < size:
+                break  # klip bitti: son kare kalır
+            self.last = buf
+            self.pos += 1
+        if self.last is None:
+            return Image.new("RGB", (self.W, self.H))
+        return Image.frombuffer("RGB", (self.W, self.H), self.last)
+
+
 class Shot:
     OVERS = 1.22
 
@@ -434,8 +482,11 @@ class Film:
                 st = {s["id"]: s["start"] for s in self.tl["subs"]}
                 bounds = [sc["start"]] + [st[i] - 0.15 for i in sc["cuts"]] + [sc["end"]]
             for k, (slot, mv) in enumerate(sc["shots"]):
-                sh = Shot(slot, mv, bounds[k], bounds[k + 1], photos,
-                          self.W, self.H, idx)
+                if mv == "video":
+                    sh = VideoShot(slot, bounds[k], bounds[k + 1], photos, self.W, self.H, idx)
+                else:
+                    sh = Shot(slot, mv, bounds[k], bounds[k + 1], photos,
+                              self.W, self.H, idx)
                 idx += 1
                 self.shots.append(sh)
                 sc["_shots"].append(sh)

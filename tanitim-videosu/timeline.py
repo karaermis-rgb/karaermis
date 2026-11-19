@@ -46,8 +46,8 @@ LINES = {
 # move: zoom_in | zoom_out | pan_r | pan_l | parallax
 SCENES_169 = [
     dict(name="acilis", lines=[1, 2], pad=2.0, ticks=True,
-         shots=[("FOTO-1", "zoom_in")],
-         cards=[dict(at=0.4, kind="question", title="Bu usta sen olabilir misin?")]),
+         shots=[("FOTO-1", "zoom_in"), ("KLIP-1", "video")], cuts=[2],
+         cards=[dict(at=0.4, shot=0, kind="question", title="Bu usta sen olabilir misin?")]),
     dict(name="alan", lines=[3, 4, 18], pad=1.5,
          shots=[("FOTO-2", "pan_r")],
          cards=[dict(at=0.5, kind="title", title=FIELD, sub="Kandıra · Kocaeli")]),
@@ -57,7 +57,7 @@ SCENES_169 = [
                 dict(at=0.0, shot=1, kind="info", title="NE ÖĞRENİYORSUN?", sub="Hijyen ve Güvenlik"),
                 dict(at=0.0, shot=2, kind="info", title="NE ÖĞRENİYORSUN?", sub="Sunum ve Servis")]),
     dict(name="atolye", lines=[24, 8], pad=3.0, sizzle=True,
-         shots=[("FOTO-6", "parallax")],
+         shots=[("KLIP-2", "video"), ("FOTO-6", "parallax")],
          cards=[dict(at=0.6, kind="label", title="Atölye ve Uygulama")]),
     dict(name="kariyer", lines=[10, 11, 25, 20], pad=2.5, lift=True,
          shots=[("FOTO-9", "zoom_in")],
@@ -69,16 +69,16 @@ SCENES_169 = [
          cards=[dict(at=0.4, kind="names", title="Alan Öğretmenlerimiz",
                      items=["Ebru KARAERMİŞ", "Alpay ŞİMŞEK"])]),
     dict(name="kapanis", lines=[14, 22, 15], pad=1.5,
-         shots=[("FOTO-12", "zoom_out")],
-         cards=[dict(at=0.3, kind="cta", title="Seni de mutfağımıza bekliyoruz!")]),
+         shots=[("KLIP-3", "video"), ("FOTO-12", "zoom_out")], cuts=[15],
+         cards=[dict(at=0.3, shot=1, kind="cta", title="Seni de mutfağımıza bekliyoruz!")]),
     dict(name="kunye", lines=[], pad=9.0, endcard=True, shots=[], cards=[]),
 ]
 
 # 60 sn dikey kesit: aynı cümlelerin alt kümesi
 SCENES_916 = [
     dict(name="acilis", lines=[1, 2], pad=1.6, ticks=True,
-         shots=[("FOTO-1", "zoom_in")],
-         cards=[dict(at=0.2, kind="question", title="Bu usta sen olabilir misin?")]),
+         shots=[("FOTO-1", "zoom_in"), ("KLIP-1", "video")], cuts=[2],
+         cards=[dict(at=0.2, shot=0, kind="question", title="Bu usta sen olabilir misin?")]),
     dict(name="alan", lines=[4], pad=0.8,
          shots=[("FOTO-2", "pan_r")],
          cards=[dict(at=0.3, kind="title", title=FIELD, sub="Kandıra · Kocaeli")]),
@@ -88,17 +88,17 @@ SCENES_916 = [
                 dict(at=0.0, shot=1, kind="info", title="NE ÖĞRENİYORSUN?", sub="Hijyen ve Güvenlik"),
                 dict(at=0.0, shot=2, kind="info", title="NE ÖĞRENİYORSUN?", sub="Sunum ve Servis")]),
     dict(name="atolye", lines=[24], pad=1.5, sizzle=True,
-         shots=[("FOTO-6", "zoom_in")],
+         shots=[("KLIP-2", "video"), ("FOTO-6", "zoom_in")],
          cards=[dict(at=0.3, kind="label", title="Atölye ve Uygulama")]),
     dict(name="kariyer", lines=[11], pad=3.2, lift=True,
          shots=[("FOTO-9", "zoom_in")],
          cards=[dict(at=0.2, kind="list", title="Nerelerde çalışabilirsin?",
                      items=["Restoranlar", "Oteller", "Pastaneler",
                             "Toplu yemek", "Kendi işletmen"])]),
-    dict(name="kapanis", lines=[15], pad=0.8,
-         shots=[("FOTO-12", "zoom_out")],
-         cards=[dict(at=0.2, kind="cta", title="Seni de mutfağımıza bekliyoruz!")]),
-    dict(name="kunye", lines=[], pad=7.5, endcard=True, shots=[], cards=[]),
+    dict(name="kapanis", lines=[15], pad=3.8,
+         shots=[("KLIP-3", "video"), ("FOTO-12", "zoom_out")],
+         cards=[dict(at=0.2, shot=1, kind="cta", title="Seni de mutfağımıza bekliyoruz!")]),
+    dict(name="kunye", lines=[], pad=4.5, endcard=True, shots=[], cards=[]),
 ]
 
 ENDCARD = dict(
@@ -141,7 +141,7 @@ if ORNEK:
         dict(SCENES_916[3], lines=[107], pad=1.5),
         dict(SCENES_916[4], lines=[11], pad=2.0),
         SCENES_916[5],
-        dict(SCENES_916[6], pad=5.4),
+        dict(SCENES_916[6], pad=2.4),
     ]
     ENDCARD = dict(ENDCARD, rows=[
         "Adres: Örnek Mah. Okul Cad. No:1 Kandıra / Kocaeli (ÖRNEK)",
