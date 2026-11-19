@@ -21,7 +21,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 FOTO_DIR = os.path.join(HERE, "fotograflar")
 OUT_DIR = os.path.join(HERE, "cikti")
 FPS = 30
-TR = 0.8  # geçiş süresi
+TR = 0.5  # geçiş süresi (dinamik kurgu için kısa)
 
 FD = "/usr/share/fonts/opentype/inter/"
 F_BLACK = FD + "InterDisplay-Black.otf"
@@ -157,6 +157,10 @@ class VideoShot:
     """Video klip çekimi: kareler ffmpeg ile sırayla okunur (her işçi kendi okuyucusu)."""
 
     def __init__(self, slot, start, end, photos, W, H, idx):
+        off = None
+        if "@" in slot:  # "KLIP-2@3.5" = klibin 3,5. saniyesinden başla
+            slot, off = slot.split("@")
+            off = float(off)
         info = photos.get(slot) or {}
         self.slot, self.start, self.end, self.W, self.H, self.idx = slot, start, end, W, H, idx
         self.path = os.path.normpath(os.path.join(FOTO_DIR, info["dosya"]))
@@ -166,8 +170,12 @@ class VideoShot:
                                              "-of", "csv=p=0", self.path]).decode())
         self.t0 = start - TR / 2
         L = (end - start) + TR
-        self.slow = max(1.0, L / dur)              # klip kısa kalırsa yavaşlat
-        self.ss = max(0.0, (dur - L) / 2) if self.slow == 1.0 else 0.0
+        if off is not None:
+            self.ss = min(off, max(0.0, dur - 1.0))
+            self.slow = max(1.0, L / (dur - self.ss))
+        else:
+            self.slow = max(1.0, L / dur)              # klip kısa kalırsa yavaşlat
+            self.ss = max(0.0, (dur - L) / 2) if self.slow == 1.0 else 0.0
         self.proc, self.pos, self.last = None, -1, None
 
     def _open(self, n0):
@@ -480,7 +488,8 @@ class Film:
             bounds = [sc["start"] + k * d for k in range(n)] + [sc["end"]]
             if sc.get("cuts"):  # çekim geçişleri belirli cümlelerin başına hizalanır
                 st = {s["id"]: s["start"] for s in self.tl["subs"]}
-                bounds = [sc["start"]] + [st[i] - 0.15 for i in sc["cuts"]] + [sc["end"]]
+                bounds = [sc["start"]] + [sc["start"] + i if isinstance(i, float) else st[i] - 0.15
+                                          for i in sc["cuts"]] + [sc["end"]]
             for k, (slot, mv) in enumerate(sc["shots"]):
                 if mv == "video":
                     sh = VideoShot(slot, bounds[k], bounds[k + 1], photos, self.W, self.H, idx)

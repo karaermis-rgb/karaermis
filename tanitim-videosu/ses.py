@@ -77,7 +77,7 @@ def shaker():
     return hp(RNG.standard_normal(n), 6000) * env_exp(n, 0.02) * 0.5
 
 
-def music(total, bpm=92, lift_ranges=(), calm_ranges=()):
+def music(total, bpm=100, lift_ranges=(), calm_ranges=()):
     n = int(total * SR) + SR
     out = np.zeros((n, 2))
     beat = 60 / bpm
