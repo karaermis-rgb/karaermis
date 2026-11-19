@@ -1,0 +1,101 @@
+{
+  "_aciklama": "Her yuvaya fotograflar/ klasöründeki dosya adını yazın (null = yer tutucu). 'kirp' = [x0,y0,x1,y1] piksel; araçlar kadraj dışında kalsın diye. Plakalar ayrıca dosyalarda bulanıklaştırıldı. 'grafik': true = fotoğraf yerine yazısız sıcak renkli zemin (demo).",
+  "FOTO-1": {
+    "dosya": "okul_bahce_genis.jpg",
+    "tarif": "Okul binası, bahçeden geniş görünüm",
+    "kirp": [
+      0,
+      0,
+      3200,
+      850
+    ]
+  },
+  "FOTO-2": {
+    "dosya": "okul_cephe_gunesli.jpg",
+    "tarif": "Okul cephesi, güneşli",
+    "kirp": [
+      0,
+      0,
+      3200,
+      955
+    ]
+  },
+  "FOTO-3": {
+    "dosya": null,
+    "tarif": "1. dal uygulaması",
+    "grafik": true
+  },
+  "FOTO-4": {
+    "dosya": null,
+    "tarif": "2. dal uygulaması",
+    "grafik": true
+  },
+  "FOTO-5": {
+    "dosya": null,
+    "tarif": "3. dal uygulaması",
+    "grafik": true
+  },
+  "FOTO-6": {
+    "dosya": "temsili_tava.jpg",
+    "tarif": "Kızgın yağda cızırdayan tava (okulda çekilmedi)",
+    "temsili": true
+  },
+  "FOTO-7": {
+    "dosya": null,
+    "tarif": "Atölyede uygulama 2",
+    "grafik": true
+  },
+  "FOTO-8": {
+    "dosya": null,
+    "tarif": "Atölyede uygulama 3 / hijyen",
+    "grafik": true
+  },
+  "FOTO-9": {
+    "dosya": null,
+    "tarif": "Servis / sunum karesi",
+    "grafik": true
+  },
+  "FOTO-10": {
+    "dosya": null,
+    "tarif": "Hazırlanan tabak / ürün sunumu",
+    "grafik": true
+  },
+  "FOTO-11": {
+    "dosya": "okul_giris_kapi.jpg",
+    "tarif": "Okul giriş kapısı",
+    "kirp": [
+      0,
+      0,
+      4000,
+      1160
+    ]
+  },
+  "FOTO-12": {
+    "dosya": "okul_cephe_alt_aci.jpg",
+    "tarif": "Okul cephesi, alt açı",
+    "kirp": [
+      0,
+      0,
+      3200,
+      1175
+    ]
+  },
+  "KLIP-1": {
+    "dosya": "../klipler/temsili_ogrenci_erkek.mp4",
+    "tarif": "Şef önlüklü erkek öğrenci portresi (yapay zekâ, Veo)",
+    "temsili": true,
+    "odak_x": 0.5
+  },
+  "KLIP-2": {
+    "dosya": "../klipler/temsili_alevli_tava.mp4",
+    "tarif": "Alevli tavayla çalışan genç (yapay zekâ, Veo)",
+    "temsili": true,
+    "odak_x": 0.62
+  },
+  "KLIP-3": {
+    "dosya": "../klipler/temsili_ogrenci_kiz.mp4",
+    "tarif": "Şef önlüklü gülümseyen kız öğrenci (yapay zekâ, Veo)",
+    "temsili": true,
+    "odak_x": 0.54
+  }
+}
